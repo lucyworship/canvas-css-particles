@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>登录 - 管理后台 - 奇异果 qiyiguo.tv</title>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<style>
+html,body{
+  width: 100%;
+  height: 100%;
+}
+ .container{
+    position: absolute;
+    top: 0;
+    left: 50%;
+  }
+  .container .row>div>.login-panel{
+    z-index: 999;
+  }
+  .particles li,.particles li a,.particles li img{
+    display: block;
+    padding: 0;
+
+  }
+  .particles li img{
+    width: 45px;
+    height: 45px;
+    position: absolute;
+    cursor: pointer;
+    z-index: 88;
+    /*transition: all 10s linear;*/
+  }
+  .particles li{
+    position: absolute;
+    z-index: 22;
+  }
+
+#canvas{
+
+  position: absolute;
+}
+.particles{
+  position: absolute;
+}
+body{
+  background:url(bg.jpg) center no-repeat !important;
+  background-size: cover !important;
+}
+</style>
+<!-- jQuery --> 
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script> 
+</head>
+
+
+<body class="loginpages" style="background: #f7fafc;position: relative;" >
+
+<canvas id="canvas"></canvas>
+<div class="particles">
+  <ul>
+    
+  </ul>
+</div>
+
+
+
+
+
+<script >
+  pics = [
+    ["http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png", "http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png"],
+    ["http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png", "http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png"],
+    ["http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png", "http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png"],
+    ["http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png", "http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png"],
+    ["http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png", "http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png"],
+    ["http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png", "http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png"],
+    ["http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png", "http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png"],
+    ["http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png", "http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png"],
+    ["http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png", "http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png"],
+    ["http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png", "http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png"],
+    ["http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png", "http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png"],
+    ["http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png", "http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png"],
+    ["http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png", "http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png"],
+    ["http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png", "http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png"],
+    ["http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png", "http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png"],
+    ["http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png", "http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png"],
+    ["http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png", "http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png"],
+    ["http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png", "http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png"],
+    ["http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png", "http://mat1.gtimg.com/news/2015/h5/pingjunren3/loadingbg.png"]
+  ];
+winH = $(window).height();
+winW = $(window).width();
+var contianerW = $(".container").width();
+$("body").css({
+  "height": winH,
+  "overflow": "hidden"
+});
+$(".container").css("margin-left", -(contianerW * 0.5));
+for(var i = 0; i < pics.length; i++) {
+  var _w = $(window).width();
+  var _h = $(window).height();
+  var ramL = Math.floor(Math.random() * _w);
+  var ramT = Math.floor(Math.random() * _h);
+  var ramWidth = Math.floor(Math.random() * 40) + 15;
+  var ramDuration = Math.floor(Math.random() * 10) + 20;
+  var ramClassNum = Math.floor(Math.random() * 4);
+  $(".particles ul").append("<li class=" + i + "><img src=" + pics[i][0] + " target=" + pics[i][1] + "></li>");
+  $(".particles ul li").eq(i).find("img").css({
+    "left": ramL,
+    "top": ramT,
+     "width": ramWidth,
+    "height": ramWidth,
+    "border-radius": ramWidth * 0.5
+  });
+}
+repeatAnimate();
+function repeatAnimate() {
+  for(var i = 0; i < pics.length; i++) {
+    var _w = $(window).width();
+    var _h = $(window).height();
+    var ramImgL = Math.floor(Math.random() * _w);
+    var ramImgT = Math.floor(Math.random() * _h);
+    var ramDirection= Math.random() *(-2)+1;
+    
+    //限定边距
+    if(ramDirection<0){
+        ramImgL=Math.floor(Math.random() *ramImgL);
+       
+    }      
+
+    $(".particles ul li").eq(i).find("img").animate({
+      "left": "" + ramImgL + "px",
+      "top": "" + ramImgT + "px"
+    },10000)
+  }
+}
+repeatAnimate();
+
+var imgAnimate=setInterval(function() {
+  repeatAnimate();
+}, 10000)
+
+
+function refressImagePos() {
+  var linePos = [];
+  var imgW = [];
+  for(var a = 0; a < pics.length; a++) {
+    linePos.push($("li").eq(a).find("img").offset());
+    imgW.push($("li").eq(a).find("img").width() * 0.5);
+  }
+  // console.log(imgW);
+  drawLine(linePos, imgW);
+}
+var lineAnimate=setInterval(function() {
+  refressImagePos();
+}, 33)
+
+$(".particles li").on("click", function() {
+  var _this = $(this).find("img");
+  var href = _this.attr("target");
+  window.open(href, '_blank')
+  console.log(href);
+})
+
+
+
+function drawLine(linePos, imgW) {
+  var myCanvas = document.getElementById("canvas");
+  myCanvas.width = winW;
+  myCanvas.height = winH;
+  var context = myCanvas.getContext("2d");
+  context.fillStyle = 'transparent'; //填充颜色：红色，半透明
+  context.strokeStyle = 'rgba(255,255,244,0.2)'; //线条颜色：绿色
+  context.lineWidth = 1; //设置线宽
+  context.save(); //保存状态
+  for(var i = 0; i < linePos.length; i++) {
+    if(i + 1 < linePos.length) {
+      context.moveTo((linePos[i].left + imgW[i]), (linePos[i].top + imgW[i]));
+      context.lineTo((linePos[i + 1].left + imgW[i + 1]), (linePos[i + 1].top + imgW[i + 1]));
+    } else {
+      context.moveTo((linePos[i].left + imgW[i]), (linePos[i].top + imgW[i]));
+      context.lineTo((linePos[0].left + imgW[0]), (linePos[0].top + imgW[0]));
+    }
+  }
+  context.closePath(); //可以把这句注释掉再运行比较下不同
+  context.stroke(); //画线框
+  context.fill(); //填充颜色
+  context.restore(); //返回原始状态
+}
+ </script>
+
+
+</body>
+</html>
