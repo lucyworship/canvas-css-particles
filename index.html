@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <meta name="description" content="">
-<meta name="author" content="">
-<title>登录 - 管理后台 - 奇异果 qiyiguo.tv</title>
+<meta name="author" content="lucyworship">
+<title>lucyworship-css-canvas-particles</title>
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -123,6 +123,7 @@ for(var i = 0; i < pics.length; i++) {
   });
 }
 repeatAnimate();
+        //图片动画
 function repeatAnimate() {
   for(var i = 0; i < pics.length; i++) {
     var _w = $(window).width();
@@ -143,13 +144,13 @@ function repeatAnimate() {
     },10000)
   }
 }
-repeatAnimate();
+
 
 var imgAnimate=setInterval(function() {
   repeatAnimate();
 }, 10000)
 
-
+//传图片位置
 function refressImagePos() {
   var linePos = [];
   var imgW = [];
@@ -171,8 +172,7 @@ $(".particles li").on("click", function() {
   console.log(href);
 })
 
-
-
+//canvas画线
 function drawLine(linePos, imgW) {
   var myCanvas = document.getElementById("canvas");
   myCanvas.width = winW;
